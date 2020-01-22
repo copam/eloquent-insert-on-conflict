@@ -43,7 +43,7 @@ User::insertOnConflict([
     'id'    => 1,
     'name'  => 'new name',
     'email' => 'foo@gmail.com',
-], ['name'], 'do update set');
+], ['name'], 'do update set', 'id');
 // The name will be updated but not the email.
 ```
 
@@ -57,13 +57,13 @@ In the following example, if a user with id = 1 doesn't exist, it will be create
 User::insertOnConflict([
     'id'    => 1,
     'name'  => 'created user',
-], ['name' => 'updated user'], 'do update set');
+], ['name' => 'updated user'], 'do update set', 'id');
 ```
 
 The generated SQL is:
 
 ```sql
-INSERT INTO `users` (`id`, `name`) VALUES (1, "created user") ON CONFLICT DO UPDATE SET `name` = "updated user"
+INSERT INTO `users` (`id`, `name`) VALUES (1, "created user") ON CONFLICT (id) DO UPDATE SET `name` = "updated user"
 ```
 
 You may combine key/value pairs and column names in the 2nd argument to specify the columns to update with a custom literal or expression or with the default `VALUES(column)`. For example:
@@ -74,7 +74,7 @@ User::insertOnConflict([
     'name'     => 'created user',
     'email'    => 'new@gmail.com',
     'password' => 'secret',
-], ['name' => 'updated user', 'email'], 'do update set');
+], ['name' => 'updated user', 'email'], 'do update set', 'id');
 ```
 
 will generate
@@ -82,5 +82,5 @@ will generate
 ```sql
 INSERT INTO `users` (`id`, `name`, `email`, `password`)
 VALUES (1, "created user", "new@gmail.com", "secret")
-ON CONFLICT DO UPDATE SET `name` = "updated user", `email` = VALUES(`email`)
+ON CONFLICT (id) DO UPDATE SET `name` = "updated user", `email` = EXCLUDED.`email`
 ```
