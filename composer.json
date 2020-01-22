@@ -1,0 +1,37 @@
+{
+	"name": "rits-tecnologia/eloquent-insert-on-conflict",
+	"description": "Macros for INSERT ON CONFLICT with Eloquent",
+	"keywords": ["laravel", "eloquent", "database", "postgresql"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Juciano Araujo",
+			"email": "jucianoaraujo@rits.com.br"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"InsertOnConflict\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"InsertOnConflict\\Tests\\": "tests"
+		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"InsertOnConflict\\InsertOnConflictServiceProvider"
+			]
+		}
+	},
+	"require": {
+		"php": "^7.2",
+		"illuminate/database": "^6.0"
+	},
+	"require-dev": {
+		"laravel/laravel": "^6.0",
+		"orchestra/testbench": "^4.5"
+	}
+}
