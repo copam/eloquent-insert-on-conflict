@@ -28,10 +28,10 @@
 	},
 	"require": {
 		"php": "^7.2",
-		"illuminate/database": "^6.0"
+		"illuminate/database": ">=6.0"
 	},
 	"require-dev": {
-		"laravel/laravel": "^6.0",
+		"laravel/laravel": ">=6.0",
 		"orchestra/testbench": "^4.5"
 	}
 }
